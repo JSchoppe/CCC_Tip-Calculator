@@ -23,6 +23,54 @@ namespace TipCalculator
         public MainWindow()
         {
             InitializeComponent();
+            WarningTotal.Visibility = Visibility.Hidden;
+            WarningPercent.Visibility = Visibility.Hidden;
+
+            InputPercent.Text = "15";
+            InputTotal.Text = "10.00";
+        }
+
+        private void InputTotal_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (double.TryParse(InputTotal.Text, out double total))
+            {
+                WarningTotal.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                WarningTotal.Visibility = Visibility.Visible;
+            }
+            Calculate();
+        }
+
+        private void InputPercent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (double.TryParse(InputPercent.Text, out double total))
+            {
+                WarningPercent.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                WarningPercent.Visibility = Visibility.Visible;
+            }
+            Calculate();
+        }
+
+        private void Calculate()
+        {
+            if (double.TryParse(InputTotal.Text, out double total) && double.TryParse(InputPercent.Text, out double percent))
+            {
+                OutputWithTip.Text = (total + total * (percent / 100)).ToString("F");
+            }
+            else
+            {
+                OutputWithTip.Text = "-";
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TipCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Tip Calculator" Height="500" Width="600
+        ">
     <Grid>
-        
+        <TabControl HorizontalAlignment="Left" Height="469" VerticalAlignment="Top" Width="592">
+            <TabItem Header="Calculate">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="InputTotal" HorizontalAlignment="Left" Height="50" Margin="40,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" FontSize="36" TextChanged="InputTotal_TextChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="40,85,0,0" TextWrapping="Wrap" Text="Bill Total" VerticalAlignment="Top" Height="22" Width="140"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,30,0,0" TextWrapping="Wrap" Text="$" VerticalAlignment="Top" Height="50" Width="40" FontSize="36" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="180,30,0,0" TextWrapping="Wrap" Text="x" VerticalAlignment="Top" Height="50" Width="35" FontSize="36" TextAlignment="Center"/>
+                    <TextBox x:Name="InputPercent" HorizontalAlignment="Left" Height="50" Margin="215,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" FontSize="36" TextAlignment="Right" TextChanged="InputPercent_TextChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="295,30,0,0" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Height="50" Width="40" FontSize="36" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="215,85,0,0" TextWrapping="Wrap" Text="Tip Percent" VerticalAlignment="Top" Height="22" Width="80"/>
+                    <TextBox x:Name="OutputWithTip" HorizontalAlignment="Left" Height="50" Margin="430,30,0,0" TextWrapping="Wrap" Text="15" VerticalAlignment="Top" Width="140" FontSize="36" TextAlignment="Right" IsEnabled="False"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="350,30,0,0" TextWrapping="Wrap" Text="≈" VerticalAlignment="Top" Height="50" Width="40" FontSize="36" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="390,30,0,0" TextWrapping="Wrap" Text="$" VerticalAlignment="Top" Height="50" Width="40" FontSize="36" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="430,85,0,0" TextWrapping="Wrap" Text="Bill with Tip" VerticalAlignment="Top" Height="22" Width="80"/>
+                    <TextBlock x:Name="WarningTotal" HorizontalAlignment="Left" Margin="40,112,0,0" TextWrapping="Wrap" Text="*Does not follow the format 0.00!" VerticalAlignment="Top" Height="40" Width="140" Foreground="Red" FontWeight="Bold" IsHitTestVisible="False"/>
+                    <TextBlock x:Name="WarningPercent" HorizontalAlignment="Left" Margin="215,112,0,0" TextWrapping="Wrap" Text="*Does not follow the format 0.00!" VerticalAlignment="Top" Height="40" Width="140" Foreground="Red" FontWeight="Bold" IsHitTestVisible="False"/>
+                    <TextBox x:Name="InputTotal_Copy" HorizontalAlignment="Left" Height="50" Margin="40,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" FontSize="36" TextChanged="InputTotal_TextChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,180,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Height="50" Width="40" FontSize="36" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="40,235,0,0" TextWrapping="Wrap" Text="No. of People Splitting" VerticalAlignment="Top" Height="22" Width="140"/>
+                    <TextBlock x:Name="WarningTotal_Copy" HorizontalAlignment="Left" Margin="40,262,0,0" TextWrapping="Wrap" Text="*Not a number!" VerticalAlignment="Top" Height="40" Width="140" Foreground="Red" FontWeight="Bold" IsHitTestVisible="False"/>
+                    <CheckBox Content="Use Experience Based %" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Experience Based Percent">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
