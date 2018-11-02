@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using static TipCalculator.Utilities;
 
 namespace TipCalculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// <summary>Rounding levels based on USD</summary>
+    enum RoundMode
+    {
+        toCent,
+        toQuarter,
+        toDollar
+    }
+
+    /// <summary>Interaction logic for MainWindow.xaml</summary>
     public partial class MainWindow : Window
     {
+        private RoundMode currentRoundMode = RoundMode.toQuarter;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -60,7 +58,20 @@ namespace TipCalculator
         {
             if (double.TryParse(InputTotal.Text, out double total) && double.TryParse(InputPercent.Text, out double percent))
             {
-                OutputWithTip.Text = (total + total * (percent / 100)).ToString("F");
+                double exactTotalWithTip = (total + total * (percent / 100));
+
+                switch (currentRoundMode)
+                {
+                    case RoundMode.toCent:
+                        OutputWithTip.Text = RoundByUnit(exactTotalWithTip, 0.01).ToString("F");
+                        break;
+                    case RoundMode.toQuarter:
+                        OutputWithTip.Text = RoundByUnit(exactTotalWithTip, 0.25).ToString("F");
+                        break;
+                    case RoundMode.toDollar:
+                        OutputWithTip.Text = RoundByUnit(exactTotalWithTip, 1.00).ToString("F");
+                        break;
+                }
             }
             else
             {
@@ -71,6 +82,13 @@ namespace TipCalculator
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void RoundingSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            currentRoundMode = (RoundMode)RoundingSlider.Value;
+            RoundModeLabel.Text = "Payment Rounding: " + UnCamelCase(currentRoundMode.ToString());
+            Calculate();
         }
     }
 }
